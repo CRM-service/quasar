@@ -217,6 +217,8 @@ export default {
         this.model = new Date(this.model.setMinutes(this.__parseTypeValue('minute', value)))
       }
     },
+    reset () {
+    },
 
     /* helpers */
     __pad (unit, filler) {

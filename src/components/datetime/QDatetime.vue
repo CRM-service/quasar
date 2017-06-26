@@ -212,6 +212,7 @@ export default {
     __onFocus () {
       this.focused = true
       this.$emit('focus')
+      this.$refs.target.reset()
     },
     __onBlur (e) {
       this.__onClose()

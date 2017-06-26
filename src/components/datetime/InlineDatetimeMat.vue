@@ -422,6 +422,9 @@ export default {
 
       this.model = new Date(this.model.setMinutes(this.__parseTypeValue('minute', value)))
     },
+    reset () {
+      this.view = this.type === 'time' ? 'hour' : 'day'
+    },
 
     /* helpers */
     __pad (unit, filler) {
