@@ -93,7 +93,7 @@
         @select="__select"
       >
         <div class="modal-buttons modal-buttons-top row full-width">
-          <q-btn :color="color" v-if="!noClear && model" @click="clear()" flat>
+          <q-btn :color="color" v-if="!noClear && value" @click="clear()" flat>
             <span v-html="clearLabel"></span>
           </q-btn>
           <div class="col"></div>
