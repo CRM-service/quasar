@@ -14,6 +14,9 @@ export default {
     cancel: 'Cancel',
     clear: 'Clear'
   },
+  datetimeFormat: 'YYYY-MM-DD HH:mm',
+  dateFormat: 'YYYY-MM-DD',
+  timeFormat: 'HH:mm',
   timeFormat24h: false,
   mondayFirst: false,
   saturdayFirst: false

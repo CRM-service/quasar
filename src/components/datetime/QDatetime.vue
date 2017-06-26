@@ -116,6 +116,7 @@ import QInlineDatetime from './QInlineDatetime'
 import { QBtn } from '../btn'
 import { formatDate, isSameDate } from '../../utils/date'
 import { QModal } from '../modal'
+import locale from '../../utils/locale'
 
 let contentCSS = {
   ios: {
@@ -177,13 +178,13 @@ export default {
         format = this.format
       }
       else if (this.type === 'date') {
-        format = 'YYYY-MM-DD'
+        format = locale.dateFormat
       }
       else if (this.type === 'time') {
-        format = 'HH:mm'
+        format = locale.timeFormat
       }
       else {
-        format = 'YYYY-MM-DD HH:mm:ss'
+        format = locale.datetimeFormat
       }
 
       return formatDate(this.value, format)
