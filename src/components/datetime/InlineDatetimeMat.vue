@@ -98,7 +98,8 @@
 
         <div
           v-if="view === 'day'"
-          class="q-datetime-view-day"
+          class="q-datetime-view-day no-scroll"
+          v-touch-swipe.horizontal="__swipe"
         >
           <div class="row items-center content-center">
             <q-btn
@@ -110,7 +111,7 @@
             >
               <q-icon name="keyboard_arrow_left"></q-icon>
             </q-btn>
-            <div class="col q-datetime-dark">
+            <div class="col q-datetime-dark" :class="animationClass">
               {{ monthStamp }}
             </div>
             <q-btn
@@ -123,10 +124,10 @@
               <q-icon name="keyboard_arrow_right"></q-icon>
             </q-btn>
           </div>
-          <div class="q-datetime-weekdays row items-center justify-start">
+          <div class="q-datetime-weekdays row items-center justify-start" :class="animationClass">
             <div v-for="day in headerDayNames">{{day}}</div>
           </div>
-          <div class="q-datetime-days row wrap items-center justify-start content-center">
+          <div class="q-datetime-days row wrap items-center justify-start content-center" :class="animationClass" @animationend="__animEnd">
             <div v-for="fillerDay in fillerDays" class="q-datetime-fillerday"></div>
             <div v-if="min" v-for="fillerDay in beforeMinDays" class="row items-center content-center justify-center disabled">
               {{ fillerDay }}
@@ -262,7 +263,8 @@ export default {
     return {
       view,
       dragging: false,
-      centerClockPos: 0
+      centerClockPos: 0,
+      animationClass: ''
     }
   },
   watch: {
@@ -478,7 +480,54 @@ export default {
       else {
         this.setMinute(Math.round(angle / 6))
       }
+    },
+    __swipe (ev) {
+      if (ev.distance.x > 100) this.animationClass = `swipe-${ev.direction}-out`
+    },
+    __animEnd (ev) {
+      if (this.animationClass === 'swipe-left-out') {
+        this.setMonth(this.month + 1, true)
+        this.animationClass = 'swipe-left-in'
+      }
+      else if (this.animationClass === 'swipe-right-out') {
+        this.setMonth(this.month - 1, true)
+        this.animationClass = 'swipe-right-in'
+      }
+      else this.animationClass = ''
     }
   }
 }
 </script>
+
+<style scoped>
+.swipe-left-out {
+  animation: swipe-left-out .1s;
+}
+.swipe-left-in {
+  animation: swipe-left-in .2s;
+  transition-timing-function: ease-in;
+}
+.swipe-right-out {
+  animation: swipe-right-out .1s;
+}
+.swipe-right-in {
+  animation: swipe-right-in .2s;
+  transition-timing-function: ease-in;
+}
+@keyframes swipe-left-out {
+  0% { transform: translateX(0) }
+  100% { transform: translateX(-100%) }
+}
+@keyframes swipe-left-in {
+  0% { transform: translateX(100%) }
+  100% { transform: translateX(0) }
+}
+@keyframes swipe-right-out {
+  0% { transform: translateX(0) }
+  100% { transform: translateX(100%) }
+}
+@keyframes swipe-right-in {
+  0% { transform: translateX(-100%) }
+  100% { transform: translateX(0) }
+}
+</style>
