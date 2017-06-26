@@ -136,7 +136,7 @@
               v-for="monthDay in daysInterval"
               class="row items-center content-center justify-center cursor-pointer"
               :class="{active: monthDay === day}"
-              @click="setDay(monthDay)"
+              @click="__select(setDay(monthDay))"
             >
               <span>{{ monthDay }}</span>
             </div>
@@ -458,7 +458,7 @@ export default {
       ev.stopPropagation()
       ev.preventDefault()
       this.dragging = false
-      this.view = 'minute'
+      this.__select()
     },
     __updateClock (ev) {
       let
@@ -482,6 +482,19 @@ export default {
       }
       else {
         this.setMinute(Math.round(angle / 6))
+      }
+    },
+    __select () {
+      if (this.editable) {
+        if (this.view === 'day' && this.type === 'datetime') {
+          this.view = 'hour'
+        }
+        else if (this.view === 'hour') {
+          this.view = 'minute'
+        }
+        else {
+          this.$emit('select', this.model)
+        }
       }
     },
     __swipe (ev) {

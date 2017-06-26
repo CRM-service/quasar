@@ -49,6 +49,7 @@
         :short-month-names="shortMonthNames"
         :color="color"
         class="no-border"
+        @select="__select"
       >
         <div class="row q-datetime-controls modal-buttons-top">
           <q-btn :color="color" v-if="!noClear && model" @click="clear()" flat>
@@ -56,7 +57,7 @@
           </q-btn>
           <div class="col"></div>
           <q-btn :color="color" @click="close()" flat><span v-html="cancelLabel"></span></q-btn>
-          <q-btn :color="color" @click="close(__update)" flat><span v-html="okLabel"></span></q-btn>
+          <q-btn :color="color" v-if="!autoClose || $q.theme !== 'mat'" @click="close(__update)" flat><span v-html="okLabel"></span></q-btn>
         </div>
       </q-inline-datetime>
     </q-popover>
@@ -89,6 +90,7 @@
         :color="color"
         class="no-border"
         :class="{'full-width': $q.theme === 'ios'}"
+        @select="__select"
       >
         <div class="modal-buttons modal-buttons-top row full-width">
           <q-btn :color="color" v-if="!noClear && model" @click="clear()" flat>
@@ -96,7 +98,7 @@
           </q-btn>
           <div class="col"></div>
           <q-btn :color="color" @click="close()" flat><span v-html="cancelLabel"></span></q-btn>
-          <q-btn :color="color" @click="close(__update)" flat><span v-html="okLabel"></span></q-btn>
+          <q-btn :color="color" v-if="!autoClose || $q.theme !== 'mat'" @click="close(__update)" flat><span v-html="okLabel"></span></q-btn>
         </div>
       </q-inline-datetime>
     </q-modal>
@@ -144,7 +146,8 @@ export default {
   props: extend(
     {
       defaultSelection: [String, Number, Date],
-      displayValue: String
+      displayValue: String,
+      autoClose: Boolean
     },
     input,
     inline
@@ -235,6 +238,12 @@ export default {
       if (!isSameDate(this.value, val)) {
         this.$emit('input', val)
         this.$emit('change', val)
+      }
+    },
+    __select (val) {
+      if (this.autoClose) {
+        this.__update()
+        this.close()
       }
     }
   }
