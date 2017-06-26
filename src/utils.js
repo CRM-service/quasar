@@ -12,6 +12,7 @@ import openURL from './utils/open-url'
 import * as scroll from './utils/scroll'
 import throttle from './utils/throttle'
 import uid from './utils/uid'
+import locale from './utils/locale'
 
 function noop () {}
 
@@ -31,5 +32,6 @@ export {
   openURL,
   scroll,
   throttle,
-  uid
+  uid,
+  locale
 }

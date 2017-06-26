@@ -1,7 +1,5 @@
-import {
-  dayNames, monthNames
-} from '../../utils/date'
 import { isDate } from '../../utils/is'
+import locale from '../../utils/locale'
 
 export const modelValidator = v => {
   const type = typeof v
@@ -38,15 +36,32 @@ export const inline = {
   },
   monthNames: {
     type: Array,
-    default: () => monthNames
+    default: () => locale.monthNames
+  },
+  shortMonthNames: {
+    type: Array,
+    default: () => locale.shortMonthNames
   },
   dayNames: {
     type: Array,
-    default: () => dayNames
+    default: () => locale.dayNames
   },
-  mondayFirst: Boolean,
-  saturdayFirst: Boolean,
-  format24h: Boolean
+  shortDayNames: {
+    type: Array,
+    default: () => locale.shortDayNames
+  },
+  mondayFirst: {
+    type: Boolean,
+    default: () => locale.mondayFirst
+  },
+  saturdayFirst: {
+    type: Boolean,
+    default: () => locale.saturdayFirst
+  },
+  format24h: {
+    type: Boolean,
+    default: () => locale.timeFormat24h
+  }
 }
 
 export const input = {
@@ -55,14 +70,14 @@ export const input = {
   placeholder: String,
   clearLabel: {
     type: String,
-    default: 'Clear'
+    default: () => locale.buttons.clear
   },
   okLabel: {
     type: String,
-    default: 'Set'
+    default: () => locale.buttons.set
   },
   cancelLabel: {
     type: String,
-    default: 'Cancel'
+    default: () => locale.buttons.cancel
   }
 }

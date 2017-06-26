@@ -45,6 +45,8 @@
         :saturday-first="saturdayFirst"
         :day-names="dayNames"
         :month-names="monthNames"
+        :short-day-names="shortDayNames"
+        :short-month-names="shortMonthNames"
         :color="color"
         class="no-border"
       >
@@ -82,6 +84,8 @@
         :saturday-first="saturdayFirst"
         :day-names="dayNames"
         :month-names="monthNames"
+        :short-day-names="shortDayNames"
+        :short-month-names="shortMonthNames"
         :color="color"
         class="no-border"
         :class="{'full-width': $q.theme === 'ios'}"

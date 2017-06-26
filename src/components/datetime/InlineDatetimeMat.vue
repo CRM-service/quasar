@@ -306,7 +306,7 @@ export default {
     },
     headerDayNames () {
       const
-        days = this.dayNames.map(day => day.slice(0, 3)),
+        days = this.shortDayNames,
         first = this.firstDayOfWeek
 
       return first > 0

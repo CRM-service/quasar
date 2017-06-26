@@ -2,21 +2,13 @@
 
 import { isDate } from './is'
 import { pad, capitalize } from './format'
+import locale from './locale'
 
 const
   MILLISECONDS_IN_DAY = 86400000,
   MILLISECONDS_IN_HOUR = 360000,
   MILLISECONDS_IN_MINUTE = 60000,
   token = /d{1,4}|M{1,4}|m{1,2}|w{1,2}|D{1,4}|YY(?:YY)?|H{1,2}|h{1,2}|s{1,2}|S{1,3}|Z{1,2}|[QExX]'/g
-
-export const dayNames = [
-  'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
-]
-
-export const monthNames = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-]
 
 function formatTimezone (offset, delimeter = '') {
   const
@@ -300,12 +292,12 @@ export const formatter = {
 
   // Month Short Name: Jan, Feb, ...
   MMM (date) {
-    return this.MMMM(date).slice(0, 3)
+    return locale.shortMonthNames[date.getMonth()]
   },
 
   // Month Name: January, February, ...
   MMMM (date) {
-    return monthNames[date.getMonth()]
+    return locale.monthNames[date.getMonth()]
   },
 
   // Quarter: 1, 2, 3, 4
@@ -338,19 +330,14 @@ export const formatter = {
     return date.getDay()
   },
 
-  // Day of week: Su, Mo, ...
+  // Short Day of week: Su, Mo, ...
   dd (date) {
-    return this.dddd(date).slice(0, 2)
-  },
-
-  // Day of week: Sun, Mon, ...
-  ddd (date) {
-    return this.dddd(date).slice(0, 3)
+    return locale.shortDayNames[date.getDay()]
   },
 
   // Day of week: Sunday, Monday, ...
   dddd (date) {
-    return dayNames[date.getDay()]
+    return locale.dayNames[date.getDay()]
   },
 
   // Day of ISO week: 1, 2, ..., 7
