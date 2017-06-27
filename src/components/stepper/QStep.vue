@@ -101,7 +101,7 @@ export default {
   },
   methods: {
     select () {
-      if (this.done) {
+      if (this.done || (this.__stepper.canJumpForward && !this.disable)) {
         this.__stepper.goToStep(this.name)
       }
     }

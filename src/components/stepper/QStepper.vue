@@ -34,6 +34,7 @@ export default {
     vertical: Boolean,
     alternativeLabels: Boolean,
     contractable: Boolean,
+    canJumpForward: Boolean,
     doneIcon: {
       type: [String, Boolean],
       default: 'check'

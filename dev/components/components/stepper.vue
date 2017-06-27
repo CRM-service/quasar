@@ -3,9 +3,10 @@
     <div class="layout-padding">
       <q-toggle label="Alternative Labels" v-model="alt" />
       <q-toggle label="Contractable" v-model="contractable" />
+      <q-toggle label="Can jump forward" v-model="canJumpForward" />
       <br><br>
 
-      <q-stepper :color="color" flat ref="stepper" v-model="step" :alternative-labels="alt" :contractable="contractable">
+      <q-stepper :color="color" flat ref="stepper" v-model="step" :alternative-labels="alt" :contractable="contractable" :can-jump-forward="canJumpForward">
         <q-step default name="first" title="Ad style">
           <div v-for="n in 10">Step 1</div>
           <q-stepper-navigation>
@@ -99,7 +100,8 @@ export default {
       alt: false,
       contractable: false,
       color: 'secondary',
-      text: ''
+      text: '',
+      canJumpForward: false
     }
   }
 }
