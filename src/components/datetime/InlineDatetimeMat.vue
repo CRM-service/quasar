@@ -227,6 +227,7 @@ import { QBtn } from '../btn'
 import { formatDate, isSameDate } from '../../utils/date'
 import DateMixin from './datetime-mixin'
 import Ripple from '../../directives/ripple'
+import TouchSwipe from '../../directives/touch-swipe'
 
 function convertToAmPm (hour) {
   return hour === 0 ? 12 : (hour >= 13 ? hour - 12 : hour)
@@ -245,7 +246,8 @@ export default {
     QBtn
   },
   directives: {
-    Ripple
+    Ripple,
+    TouchSwipe
   },
   data () {
     let view
@@ -498,52 +500,19 @@ export default {
       }
     },
     __swipe (ev) {
-      if (ev.distance.x > 100) this.animationClass = `swipe-${ev.direction}-out`
+      if (ev.distance.x > 100) this.animationClass = `q-datetime-swipe-${ev.direction}-out`
     },
     __animEnd (ev) {
-      if (this.animationClass === 'swipe-left-out') {
+      if (this.animationClass === 'q-datetime-swipe-left-out') {
         this.setMonth(this.month + 1, true)
-        this.animationClass = 'swipe-left-in'
+        this.animationClass = 'q-datetime-swipe-left-in'
       }
-      else if (this.animationClass === 'swipe-right-out') {
+      else if (this.animationClass === 'q-datetime-swipe-right-out') {
         this.setMonth(this.month - 1, true)
-        this.animationClass = 'swipe-right-in'
+        this.animationClass = 'q-datetime-swipe-right-in'
       }
       else this.animationClass = ''
     }
   }
 }
 </script>
-
-<style scoped>
-.swipe-left-out {
-  animation: swipe-left-out .1s;
-}
-.swipe-left-in {
-  animation: swipe-left-in .2s;
-  transition-timing-function: ease-in;
-}
-.swipe-right-out {
-  animation: swipe-right-out .1s;
-}
-.swipe-right-in {
-  animation: swipe-right-in .2s;
-  transition-timing-function: ease-in;
-}
-@keyframes swipe-left-out {
-  0% { transform: translateX(0) }
-  100% { transform: translateX(-100%) }
-}
-@keyframes swipe-left-in {
-  0% { transform: translateX(100%) }
-  100% { transform: translateX(0) }
-}
-@keyframes swipe-right-out {
-  0% { transform: translateX(0) }
-  100% { transform: translateX(100%) }
-}
-@keyframes swipe-right-in {
-  0% { transform: translateX(-100%) }
-  100% { transform: translateX(0) }
-}
-</style>

@@ -222,3 +222,36 @@ for $pos in 0..23
       border-width 1px 1px 1px 0
       border-style solid
       border-color $grey-4
+
+
+.q-datetime-swipe-left-out
+  animation q-datetime-swipe-left-out .1s
+.q-datetime-swipe-left-in
+  animation q-datetime-swipe-left-in .2s
+  transition-timing-function ease-in
+.q-datetime-swipe-right-out
+  animation q-datetime-swipe-right-out .1s
+.q-datetime-swipe-right-in
+  animation q-datetime-swipe-right-in .2s
+  transition-timing-function ease-in
+
+@keyframes q-datetime-swipe-left-out
+  0%
+    transform translateX(0)
+  100%
+    transfrom translateX(-100%)
+@keyframes q-datetime-swipe-left-in
+  0%
+    transform translateX(100%)
+  100%
+    transfrom translateX(0)
+@keyframes q-datetime-swipe-right-out
+  0%
+    transform translateX(0)
+  100%
+    transfrom translateX(100%)
+@keyframes q-datetime-swipe-right-in
+  0%
+    transform translateX(-100%)
+  100%
+    transfrom translateX(0)
