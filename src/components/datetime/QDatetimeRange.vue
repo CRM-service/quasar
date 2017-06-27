@@ -24,6 +24,12 @@
       :align="align"
       :format24h="format24h"
       :monday-first="mondayFirst"
+      :saturday-first="saturdayFirst"
+      :day-names="dayNames"
+      :month-names="monthNames"
+      :short-day-names="shortDayNames"
+      :short-month-names="shortMonthNames"
+      :auto-close="autoClose"
       class="col q-datetime-range-left"
       :class="className"
       :style="css"
@@ -54,6 +60,12 @@
       :align="align"
       :format24h="format24h"
       :monday-first="mondayFirst"
+      :saturday-first="saturdayFirst"
+      :day-names="dayNames"
+      :month-names="monthNames"
+      :short-day-names="shortDayNames"
+      :short-month-names="shortMonthNames"
+      :auto-close="autoClose"
       class="col q-datetime-range-right"
       :class="className"
       :style="css"
@@ -87,7 +99,8 @@ export default {
       css: [String, Object],
       defaultFrom: [String, Number, Date],
       defaultTo: [String, Number, Date],
-      vertical: Boolean
+      vertical: Boolean,
+      autoClose: Boolean
     }
   ),
   computed: {
