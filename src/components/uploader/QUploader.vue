@@ -160,15 +160,27 @@ export default {
     color: {
       type: String,
       default: 'primary'
-    }
+    },
+    existingFiles: Array
   },
   data () {
+    let
+      uploadedSize = 0,
+      totalSize = 0,
+      queue = [],
+      files = (this.existingFiles || []).map(file => {
+        if (file.__uploaded === void 0) file = initFile(file)
+        uploadedSize += file.__uploaded
+        totalSize += file.size
+        if (!file.__doneUploading) queue.push(file)
+        return file
+      })
     return {
-      queue: [],
-      files: [],
+      queue,
+      files,
+      uploadedSize,
+      totalSize,
       uploading: false,
-      uploadedSize: 0,
-      totalSize: 0,
       xhrs: [],
       focused: false
     }
