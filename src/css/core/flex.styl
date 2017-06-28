@@ -102,6 +102,10 @@ for $name, $size in $sizes
   &stretch
     align-self stretch
 
+.flex-center
+  @extend .items-center
+  @extend .justify-center
+
 for $i in (1..$flex-cols)
   .col-{$i}
     flex 0 0 (round($i / $flex-cols * 100, 4))%
@@ -115,6 +119,16 @@ for $name, $size in $flex-gutter
     margin (- $size) 0 0 (- $size)
     > div
       padding $size 0 0 $size
+
+.no-horiz-gutter
+  margin-left 0
+  > div
+    padding-left 0
+
+.no-vert-gutter
+  margin-top 0
+  > div
+    padding-top 0
 
 for $name, $size in $sizes
   @media (min-width $size)
@@ -131,5 +145,7 @@ for $name, $size in $sizes
         flex 0 0 (round($i / $flex-cols * 100, 4))%
       .row > .col-{$name}-{$i}
         max-width (round($i / $flex-cols * 100, 4))%
+      .column > .col-{$name}-{$i}
+        max-height (round($i / $flex-cols * 100, 4))%
       .offset-{$name}-{$i}
         margin-left (round($i / $flex-cols * 100, 4))%
