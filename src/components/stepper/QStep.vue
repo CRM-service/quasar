@@ -67,7 +67,7 @@ export default {
       const data = this.__stepper
 
       if (this.active) {
-        return this.activeIcon || data.activeIcon
+        return (this.activeIcon || this.icon) || data.activeIcon
       }
       if (this.error) {
         return this.errorIcon || data.errorIcon
