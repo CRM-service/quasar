@@ -6,7 +6,7 @@ import locale from './locale'
 
 const
   MILLISECONDS_IN_DAY = 86400000,
-  MILLISECONDS_IN_HOUR = 360000,
+  MILLISECONDS_IN_HOUR = 3600000,
   MILLISECONDS_IN_MINUTE = 60000,
   token = /d{1,4}|M{1,4}|m{1,2}|w{1,2}|D{1,4}|YY(?:YY)?|H{1,2}|h{1,2}|s{1,2}|S{1,3}|Z{1,2}|[QExX]'/g
 
@@ -296,8 +296,8 @@ export const formatter = {
   },
 
   // Month Name: January, February, ...
-  MMMM (date) {
-    return locale.monthNames[date.getMonth()]
+  MMMM (date, opts = {}) {
+    return (opts.monthNames || locale.monthNames)[date.getMonth()]
   },
 
   // Quarter: 1, 2, 3, 4
@@ -336,8 +336,8 @@ export const formatter = {
   },
 
   // Day of week: Sunday, Monday, ...
-  dddd (date) {
-    return locale.dayNames[date.getDay()]
+  dddd (date, opts = {}) {
+    return (opts.dayNames || locale.dayNames)[date.getDay()]
   },
 
   // Day of ISO week: 1, 2, ..., 7
@@ -438,7 +438,7 @@ export const formatter = {
   }
 }
 
-export function formatDate (val, mask = 'YYYY-MM-DDTHH:mm:ss.SSSZ') {
+export function formatDate (val, mask = 'YYYY-MM-DDTHH:mm:ss.SSSZ', opts) {
   if (!val) {
     return
   }
@@ -447,7 +447,7 @@ export function formatDate (val, mask = 'YYYY-MM-DDTHH:mm:ss.SSSZ') {
 
   return mask.replace(token, function (match) {
     if (match in formatter) {
-      return formatter[match](date)
+      return formatter[match](date, opts)
     }
     return match
   })

@@ -190,7 +190,10 @@ export default {
         format = locale.datetimeFormat
       }
 
-      return formatDate(this.value, format)
+      return formatDate(this.value, format, {
+        dayNames: this.dayNames,
+        monthNames: this.monthNames
+      })
     }
   },
   methods: {
