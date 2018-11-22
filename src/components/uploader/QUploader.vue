@@ -169,7 +169,7 @@ export default {
       totalSize = 0,
       queue = [],
       files = (this.existingFiles || []).map(file => {
-        if (file.__uploaded === void 0) file = initFile(file)
+        if (file.__uploaded === void 0) initFile(file)
         uploadedSize += file.__uploaded
         totalSize += file.size
         if (!file.__doneUploading) queue.push(file)
